@@ -41,10 +41,12 @@ if ( ! function_exists( 'ucf_degree_external_list_card_order' ) ) {
 			}
 		}
 
+		ksort( $colleges );
+
 		$retval->types = array_values( $colleges );
 
 		return $retval;
 	}
 
-	add_filter( 'ucf_degree_external_list_sort_cards', 'ucf_degree_external_list_card_order', 10, 3);
+	add_filter( 'ucf_degree_external_list_sort_colleges', 'ucf_degree_external_list_card_order', 10, 3);
 }
