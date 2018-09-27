@@ -75,7 +75,7 @@ if ( ! function_exists( 'ucf_degree_external_list_twocol_layout' ) ) {
 				<div class="row"><div class="col-lg-6">
 			<?php elseif ( $item_count + count( $group->degrees ) > $col_split && $split === false ) : $split = true; ?>
 				</div><div class="col-lg-6">
-			<?php elseif ( $index === count( $items->types ) - 1 ) : ?>
+			<?php elseif ( $index === count( $items->types ) ) : ?>
 				</div></div>
 			<?php endif; $item_count += count( $group->degrees ); ?>
 				<<?php echo $heading_element; ?>><?php echo $group->alias; ?></<?php echo $heading_element; ?>>
