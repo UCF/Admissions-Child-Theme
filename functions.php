@@ -63,6 +63,7 @@ if ( ! function_exists( 'ucf_degree_external_list_twocol_layout' ) ) {
 
 		$col_split = ceil( $item_count / 2 );
 		$split = false;
+		$col_index = 0;
 
 		$item_count = 0;
 
@@ -70,14 +71,14 @@ if ( ! function_exists( 'ucf_degree_external_list_twocol_layout' ) ) {
 
 		if ( $items && isset( $items->types ) && is_array( $items->types ) ):
 			foreach( $items->types as $index => $group ) :
+				$item_count += count( $group->degrees );
+
 				if ( $index === 0 ) :
 			?>
 				<div class="row"><div class="col-lg-6">
-			<?php elseif ( $item_count + count( $group->degrees ) > $col_split && $split === false ) : $split = true; ?>
+			<?php elseif ( $col_index === 1 && $split === false ) : $split = true; ?>
 				</div><div class="col-lg-6">
-			<?php elseif ( $index === count( $items->types ) ) : ?>
-				</div></div>
-			<?php endif; $item_count += count( $group->degrees ); ?>
+			<?php endif;  ?>
 				<<?php echo $heading_element; ?>><?php echo $group->alias; ?></<?php echo $heading_element; ?>>
 				<ul>
 			<?php foreach( $group->degrees as $degree ) : ?>
@@ -85,7 +86,13 @@ if ( ! function_exists( 'ucf_degree_external_list_twocol_layout' ) ) {
 			<?php endforeach; ?>
 				</ul>
 		<?php
+			if ( $item_count > $col_split )
+				$col_index = 1;
+
 			endforeach;
+		?>
+		</div></div>
+		<?php
 		else:
 			echo '<p>No results found.</p>';
 		endif;
