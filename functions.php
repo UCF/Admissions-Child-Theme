@@ -26,7 +26,7 @@ if ( ! function_exists( 'ucf_degree_external_list_card_order' ) ) {
 
 					if ( ! isset( $colleges[$college->slug] ) ) {
 						$colleges[$college->slug] = (object)array(
-							'alias'  => $college->name,
+							'alias'  => str_replace( 'College of ', '', $college->name ),
 							'slug'  => $college->slug,
 							'count' => 1,
 							'degrees' => array(
