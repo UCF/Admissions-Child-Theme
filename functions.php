@@ -61,10 +61,13 @@ if ( ! function_exists( 'ucf_degree_external_list_twocol_layout' ) ) {
 			$item_count += count( $group->degrees );
 		}
 
+		// Figure out where we're going to split the columns
 		$col_split = ceil( $item_count / 2 );
-		$split = false;
 		$col_index = 0;
+		$split = false;
 
+		// Reset item count variable
+		// We're going to use it to keep track of where we are now.
 		$item_count = 0;
 
 		ob_start();
@@ -86,6 +89,8 @@ if ( ! function_exists( 'ucf_degree_external_list_twocol_layout' ) ) {
 			<?php endforeach; ?>
 				</ul>
 		<?php
+			// If we're over our split point,
+			// move onto the next column.
 			if ( $item_count > $col_split )
 				$col_index = 1;
 
