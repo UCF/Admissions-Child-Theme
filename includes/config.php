@@ -18,18 +18,6 @@ define( 'ADMISSIONS_TWOCOL_SIDEBAR_SPOTLIGHT_LAYOUTS', serialize( array(
 
 
 /**
- * Enqueue front-end css and js.
- **/
-function admissions_enqueue_frontend_assets() {
-	// Register child theme stylesheet
-	$theme = wp_get_theme();
-	$theme_version = $theme->get( 'Version' );
-	wp_enqueue_style( 'style-child', ADMISSIONS_THEME_CSS_URL . '/style.min.css', array( 'style' ), $theme_version );
-}
-add_action( 'wp_enqueue_scripts', 'admissions_enqueue_frontend_assets', 11, 0 );
-
-
-/**
  * Adds a custom ACF WYSIWYG toolbar called 'Inline Text' that only includes
  * simple inline text formatting tools and link insertion/deletion.
  */
