@@ -26,7 +26,7 @@ if ( ! function_exists( 'ucf_degree_external_list_card_order' ) ) {
 
 					if ( ! isset( $colleges[$college->slug] ) ) {
 						$colleges[$college->slug] = (object)array(
-							'alias'  => $college->name,
+							'alias'  => str_replace( 'College of ', '', $college->name ),
 							'slug'  => $college->slug,
 							'count' => 1,
 							'degrees' => array(
@@ -49,4 +49,61 @@ if ( ! function_exists( 'ucf_degree_external_list_card_order' ) ) {
 	}
 
 	add_filter( 'ucf_degree_external_list_sort_colleges', 'ucf_degree_external_list_card_order', 10, 3);
+}
+
+if ( ! function_exists( 'ucf_degree_external_list_twocol_layout' ) ) {
+	function ucf_degree_external_list_twocol_layout( $items, $args, $retval ) {
+		$heading_element = isset( $args['group_heading'] ) ? $args['group_heading'] : 'h3';
+		$item_count = 0;
+
+		// Get accuracte count of items
+		foreach( $items->types as $group ) {
+			$item_count += count( $group->degrees );
+		}
+
+		// Figure out where we're going to split the columns
+		$col_split = ceil( $item_count / 2 );
+		$col_index = 0;
+		$split = false;
+
+		// Reset item count variable
+		// We're going to use it to keep track of where we are now.
+		$item_count = 0;
+
+		ob_start();
+
+		if ( $items && isset( $items->types ) && is_array( $items->types ) ):
+			foreach( $items->types as $index => $group ) :
+				$item_count += count( $group->degrees );
+
+				if ( $index === 0 ) :
+			?>
+				<div class="row"><div class="col-lg-6">
+			<?php elseif ( $col_index === 1 && $split === false ) : $split = true; ?>
+				</div><div class="col-lg-6">
+			<?php endif;  ?>
+				<<?php echo $heading_element; ?>><?php echo $group->alias; ?></<?php echo $heading_element; ?>>
+				<ul>
+			<?php foreach( $group->degrees as $degree ) : ?>
+					<li><a href="<?php echo $degree->url; ?>"><?php echo $degree->title; ?></a>
+			<?php endforeach; ?>
+				</ul>
+		<?php
+			// If we're over our split point,
+			// move onto the next column.
+			if ( $item_count > $col_split )
+				$col_index = 1;
+
+			endforeach;
+		?>
+		</div></div>
+		<?php
+		else:
+			echo '<p>No results found.</p>';
+		endif;
+
+		return ob_get_clean();
+	}
+
+	add_filter( 'ucf_degree_external_list_twocol', 'ucf_degree_external_list_twocol_layout', 10, 3 );
 }
