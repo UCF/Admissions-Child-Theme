@@ -21,7 +21,7 @@ define( 'ADMISSIONS_TWOCOL_SIDEBAR_SPOTLIGHT_LAYOUTS', serialize( array(
  * Adds a custom ACF WYSIWYG toolbar called 'Inline Text' that only includes
  * simple inline text formatting tools and link insertion/deletion.
  *
- * @since 0.0.0
+ * @since 1.0.0
  * @author Jo Dickson
  * @param array $toolbars Array of toolbar information from ACF
  * @return array

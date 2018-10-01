@@ -7,7 +7,7 @@ if ( ! function_exists( 'ucf_degree_external_list_card_order' ) ) {
 	/**
 	 * Overrides the sorting of the degrees
 	 *
-	 * @since 0.0.0
+	 * @since 1.0.0
 	 * @author Jim Barnes
 	 * @param object $items The decoded JSON of degree data
 	 * @param string $layout The layout currently being used
@@ -57,7 +57,7 @@ if ( ! function_exists( 'ucf_degree_external_list_twocol_layout' ) ) {
 	/**
 	 * Defines a new "twocol" layout for the [ucf-external-degree-list] shortcode
 	 *
-	 * @since 0.0.0
+	 * @since 1.0.0
 	 * @author Jim Barnes
 	 * @param object $items The decoded JSON of degree data
 	 * @param array $args Any additional arguments passed in from the shortcode
