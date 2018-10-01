@@ -2,6 +2,9 @@
 
 /**
  * Enqueue front-end css and js.
+ *
+ * @author Jo Dickson
+ * @since 0.0.0
  **/
 function admissions_enqueue_frontend_assets() {
 	// Register child theme stylesheet

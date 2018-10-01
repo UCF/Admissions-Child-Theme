@@ -7,7 +7,9 @@ if ( ! function_exists( 'ucf_degree_external_list_card_order' ) ) {
 	/**
 	 * Overrides the sorting of the degrees
 	 *
-	 * @param Object $items The decoded JSON of degree data
+	 * @since 0.0.0
+	 * @author Jim Barnes
+	 * @param object $items The decoded JSON of degree data
 	 * @param string $layout The layout currently being used
 	 * @param array $args Any additional arguments passed in from the shortcode
 	 */
@@ -52,6 +54,15 @@ if ( ! function_exists( 'ucf_degree_external_list_card_order' ) ) {
 
 
 if ( ! function_exists( 'ucf_degree_external_list_twocol_layout' ) ) {
+	/**
+	 * Defines a new "twocol" layout for the [ucf-external-degree-list] shortcode
+	 *
+	 * @since 0.0.0
+	 * @author Jim Barnes
+	 * @param object $items The decoded JSON of degree data
+	 * @param array $args Any additional arguments passed in from the shortcode
+	 * @param string $retval The default returned markup
+	 */
 	function ucf_degree_external_list_twocol_layout( $items, $args, $retval ) {
 		$heading_element = isset( $args['group_heading'] ) ? $args['group_heading'] : 'h3';
 		$item_count = 0;
