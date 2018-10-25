@@ -1,0 +1,26 @@
+// Styles for Admissions' site-specific nav.  Overrides UCF WP Theme styles.
+// Selector depth required to match Bootstrap/Athena selectors
+// scss-lint:disable NestingDepth SelectorDepth
+.navbar-custom {
+  .navbar-brand {
+    @include media-breakpoint-only(lg) {
+      font-size: 1rem;
+      // scss-lint:disable ImportantRule
+      margin-right: ($spacer-x * .5) !important; // important necessary to override margin class set in markup
+      // scss-lint:enable ImportantRule
+    }
+  }
+
+  .navbar-collapse {
+    @include media-breakpoint-only(lg) {
+      max-width: 75%;
+    }
+  }
+
+  .navbar-nav .nav-link {
+    @include media-breakpoint-only(lg) {
+      padding-left: .75rem;
+      padding-right: .75rem;
+    }
+  }
+}
