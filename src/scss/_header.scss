@@ -17,10 +17,25 @@
     }
   }
 
-  .navbar-nav .nav-link {
-    @include media-breakpoint-only(lg) {
-      padding-left: .75rem;
-      padding-right: .75rem;
+  .navbar-nav {
+    .nav-link {
+      @include media-breakpoint-only(lg) {
+        padding-left: .75rem;
+        padding-right: .75rem;
+      }
+    }
+
+    .nav-item:last-child .nav-link {
+      background-color: $brand-primary;
+      color: $brand-primary-color;
+      text-shadow: 0 0 0 transparent;
+
+      &:hover,
+      &:active,
+      &:focus {
+        background-color: darken($brand-primary, 10%);
+        color: $white;
+      }
     }
   }
 }
