@@ -6,7 +6,7 @@
  *
  * Suitable layouts are defined in ADMISSIONS_TWOCOL_SIDEBAR_SPOTLIGHT_LAYOUTS.
  *
- * @since 0.0.0
+ * @since 1.0.0
  * @author Jo Dickson
  * @param object $spotlight  a WP_Post object for the Spotlight post
  * @return bool
@@ -35,7 +35,7 @@ function admissions_twocol_spotlight_layout_isvalid( $spotlight ) {
  *
  * Requires the UCF Spotlights Plugin.
  *
- * @since 0.0.0
+ * @since 1.0.0
  * @author Jo Dickson
  * @param object $spotlight  a WP_Post object for the Spotlight post
  * @return string  Spotlight markup, or empty string on failure
@@ -60,7 +60,7 @@ function admissions_twocol_display_spotlight( $spotlight ) {
  *
  * Requires the UCF Sections Plugin.
  *
- * @since 0.0.0
+ * @since 1.0.0
  * @author Jo Dickson
  * @param object $section  a WP_Post object for the Section post
  * @return string  Section markup, or empty string on failure
