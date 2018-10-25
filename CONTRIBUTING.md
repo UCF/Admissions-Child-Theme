@@ -37,7 +37,7 @@ If you've followed the steps above and have a valid bug report to submit, you ca
 
 Add a descriptive, understandable title and details about the bug in the description field, following the template provided. Please try to be as detailed as possible in your report. What steps will reproduce the issue? What browser(s) and OS experience the problem? Do other browsers show the bug differently? What would you expect to be the outcome? All of the information you provide will help us quickly evaluate and fix the issue.
 
-If you have a live example of the bug available somewhere public, please include a link in the bug report.  If you're not comfortable including the URL in the Github issue (e.g. it points to a development environment), you can make a note of it in the report (e.g. "see Slack for example URL"), then share the URL in the [#prj-Admissions-Child-Theme Slack channel](https://ucf-wp.slack.com/messages/prj-Admissions-Child-Theme/).
+If you have a live example of the bug available somewhere public, please include a link in the bug report.  If you're not comfortable including the URL in the Github issue (e.g. it points to a development environment), you can make a note of it in the report (e.g. "see Slack for example URL"), then share the URL in the [#prj-adm-child-theme Slack channel](https://ucf-wp.slack.com/messages/prj-adm-child-theme/).
 
 
 ## Feature requests
@@ -121,7 +121,7 @@ In general, we keep conversations about distributed UCF WordPress projects on th
 Whenever you post to the ucf-wp Slack, including your **job title**, information about the **college or department** you work for, as well as the **site(s) you need help with** will help us help you more effectively.
 
 ### General questions
-If you have a general question about the theme, design decisions, or any other question that isn't a help request, please post it in the [#prj-Admissions-Child-Theme Slack channel](https://ucf-wp.slack.com/messages/prj-Admissions-Child-Theme/). {{Edit this copy as needed!}}
+If you have a general question about the theme, design decisions, or any other question that isn't a help request, please post it in the [#prj-adm-child-theme Slack channel](https://ucf-wp.slack.com/messages/prj-adm-child-theme/).
 
 ### Help
 If you need help with using this theme on your site, check out our [project documentation](https://github.com/UCF/Admissions-Child-Theme/wiki).  If you can't find the answer to your question there, please drop us a line in the [#help-themes Slack channel](https://ucf-wp.slack.com/messages/help-themes/).  You don't need to @mention anyone specific, but **please note that you're using the Admissions Child Theme when posting your question** and include a link to your site if it's relevant to your question.
