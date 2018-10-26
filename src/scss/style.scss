@@ -9,15 +9,16 @@
 //
 
 // Athena Framework
-@import './ucf-athena-framework/src/scss/framework';
-
-// import any other third-party styles here
-// ...
+@import './ucf-athena-framework/src/scss/variables';
+@import './ucf-athena-framework/src/scss/bootstrap/variables';
+@import './ucf-athena-framework/src/scss/mixins';
+@import './ucf-athena-framework/src/scss/bootstrap/mixins';
 
 
 //
 // Project-specific styles and overrides
 //
 
-// Add/import your theme's custom styles here
-// ...
+@import 'header';
+
+@import 'components/colleges-grid';

@@ -1,0 +1,156 @@
+[
+    {
+        "key": "group_5b8938cfc8824",
+        "title": "Two Column Template Fields",
+        "fields": [
+            {
+                "key": "field_5b8938ffe040b",
+                "label": "Lead Text",
+                "name": "page_lead_text",
+                "type": "wysiwyg",
+                "instructions": "Optional lead text to display immediately above the two column content on this page.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "tabs": "all",
+                "toolbar": "inline_text",
+                "media_upload": 0,
+                "delay": 0
+            },
+            {
+                "key": "field_5b8952e791e55",
+                "label": "Sidebar Contents",
+                "name": "page_sidebar_contents",
+                "type": "flexible_content",
+                "instructions": "Select one or more types of content to add to the sidebar on this page.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "layouts": {
+                    "5b89553e4c083": {
+                        "key": "5b89553e4c083",
+                        "name": "page_sidebar_layout_section",
+                        "label": "Section",
+                        "display": "block",
+                        "sub_fields": [
+                            {
+                                "key": "field_5b8955617325d",
+                                "label": "Select a Section",
+                                "name": "page_sidebar_section",
+                                "type": "post_object",
+                                "instructions": "Pick an existing Section to add to the sidebar.",
+                                "required": 1,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "post_type": [
+                                    "ucf_section"
+                                ],
+                                "taxonomy": [],
+                                "allow_null": 0,
+                                "multiple": 0,
+                                "return_format": "object",
+                                "ui": 1
+                            }
+                        ],
+                        "min": "",
+                        "max": ""
+                    },
+                    "5b8955567325b": {
+                        "key": "5b8955567325b",
+                        "name": "page_sidebar_layout_spotlight",
+                        "label": "Spotlight",
+                        "display": "block",
+                        "sub_fields": [
+                            {
+                                "key": "field_5b8955ff7325e",
+                                "label": "Select a Spotlight",
+                                "name": "page_sidebar_spotlight",
+                                "type": "post_object",
+                                "instructions": "",
+                                "required": 1,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "post_type": [
+                                    "ucf_spotlight"
+                                ],
+                                "taxonomy": [],
+                                "allow_null": 0,
+                                "multiple": 0,
+                                "return_format": "object",
+                                "ui": 1
+                            }
+                        ],
+                        "min": "",
+                        "max": "1"
+                    },
+                    "5b89555a7325c": {
+                        "key": "5b89555a7325c",
+                        "name": "page_sidebar_layout_custom",
+                        "label": "Custom Content",
+                        "display": "block",
+                        "sub_fields": [
+                            {
+                                "key": "field_5b8956187325f",
+                                "label": "Custom Content",
+                                "name": "page_sidebar_custom",
+                                "type": "wysiwyg",
+                                "instructions": "",
+                                "required": 1,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "default_value": "",
+                                "tabs": "all",
+                                "toolbar": "full",
+                                "media_upload": 1,
+                                "delay": 0
+                            }
+                        ],
+                        "min": "",
+                        "max": ""
+                    }
+                },
+                "button_label": "Add Sidebar Content",
+                "min": "",
+                "max": ""
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "page_template",
+                    "operator": "==",
+                    "value": "template-twocol.php"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": 1,
+        "description": ""
+    }
+]
