@@ -35,9 +35,9 @@ Note that compiled, minified css and js files are included within the repo.  Cha
 
     The full list of modifiable config values can be viewed in `gulpfile.js` (see `config` variable).
 3. Run `gulp default` to process front-end assets.
-4. If you haven't already done so, create a new WordPress site on your development environment, and install and activate the required plugins listed above.
+4. If you haven't already done so, create a new WordPress site on your development environment, and [install and activate all theme requirements](https://github.com/UCF/Admissions-Child-Theme/wiki/Installation#installation-requirements).
 5. Set Admissions Child Theme as the active theme.
-6. Make sure you've done all the steps listed under "Configuration" above.
+6. Make sure you've done all [necessary configuration steps](https://github.com/UCF/Admissions-Child-Theme/wiki/Installation#theme-configuration).
 7. Run `gulp watch` to continuously watch changes to scss and js files.  If you enabled BrowserSync in `gulp-config.json`, it will also reload your browser when scss or js files change.
 
 
