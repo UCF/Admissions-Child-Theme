@@ -1,18 +1,18 @@
 {
   "private": true,
   "devDependencies": {
-    "browser-sync": "^2.24.6",
+    "browser-sync": "^2.26.3",
     "gulp": "^4.0.0",
     "gulp-add-src": "^1.0.0",
-    "gulp-autoprefixer": "^5.0.0",
-    "gulp-clean-css": "^3.9.4",
+    "gulp-autoprefixer": "^6.0.0",
+    "gulp-clean-css": "^4.0.0",
     "gulp-concat": "^2.6.1",
     "gulp-rename": "^1.4.0",
-    "gulp-sass": "~4.0.1",
+    "gulp-sass": "~4.0.2",
     "gulp-sass-lint": "^1.4.0",
     "gulp-sourcemaps": "^2.6.4",
-    "merge": "^1.2.0",
-    "ucf-athena-framework": "^1.0.0"
+    "merge": "^1.2.1",
+    "ucf-athena-framework": "^1.0.4"
   },
   "browserslist": [
     "last 2 versions"
