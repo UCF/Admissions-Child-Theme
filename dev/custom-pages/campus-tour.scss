@@ -1,0 +1,96 @@
+//
+// Theme variables and variable overrides
+//
+@import 'variables';
+
+
+//
+// Third-party assets
+//
+
+// Athena Framework
+@import './ucf-athena-framework/src/scss/variables';
+@import './ucf-athena-framework/src/scss/mixins';
+
+// Font Awesome
+@import './font-awesome/scss/variables';
+@import './font-awesome/scss/mixins';
+
+
+//
+// Custom page variables
+//
+$map-width-lg: 320px;
+$map-height-lg: 480px;
+$map-width-xl: $map-width-lg * 1.25;
+$map-height-xl: $map-height-lg * 1.25;
+
+
+.page-campus-tour {
+  .sidebar {
+    -webkit-overflow-scrolling: touch; //sass-lint:disable-line no-vendor-prefixes
+    background-color: $list-group-border-color;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-shrink: 0;
+    height: 100vh;
+    overflow-y: scroll;
+
+    @include media-breakpoint-up(lg) {
+      flex-basis: $map-width-lg;
+      max-width: $map-width-lg;
+    }
+
+    @include media-breakpoint-up(xl) {
+      flex-basis: $map-width-xl;
+      max-width: $map-width-xl;
+    }
+  }
+
+  .map {
+    flex-grow: 0;
+    flex-shrink: 0;
+    overflow: hidden;
+    position: relative;
+
+    @include media-breakpoint-up(lg) {
+      flex-basis: $map-height-lg;
+      height: $map-height-lg;
+      width: $map-width-lg;
+    }
+
+    @include media-breakpoint-up(xl) {
+      flex-basis: $map-height-xl;
+      height: $map-height-xl;
+      width: $map-width-xl;
+    }
+  }
+
+  .map-img {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: -1;
+  }
+
+  .map-marker {
+    color: $brand-secondary;
+    position: absolute;
+
+    &::before {
+      @include fa-icon();
+      content: $fa-var-map-marker;
+    }
+
+    @include hover-focus-active() {
+      color: $brand-complementary;
+    }
+
+    &.active {
+      color: $brand-primary;
+    }
+  }
+}
