@@ -97,12 +97,12 @@ function buildJS(src, dest) {
 }
 
 // Watcher callback for dev scss files, to be used with gulp watch task
-function cssDevWatch(event) {
+function cssDevWatch(eventPath, eventStats) {
   var src,
     dest;
 
-  if (event) {
-    src = event.path;
+  if (eventPath) {
+    src = eventPath;
     dest = src.slice(0, (src.lastIndexOf('/') > -1 ? src.lastIndexOf('/') : src.lastIndexOf('\\')) + 1);
   }
   else {
@@ -115,12 +115,12 @@ function cssDevWatch(event) {
 }
 
 // Watcher callback for dev js files, to be used with gulp watch task
-function jsDevWatch(event) {
+function jsDevWatch(eventPath, eventStats) {
   var src,
     dest;
 
-  if (event) {
-    src = event.path;
+  if (eventPath) {
+    src = eventPath;
     dest = src.slice(0, (src.lastIndexOf('/') > -1 ? src.lastIndexOf('/') : src.lastIndexOf('\\')) + 1);
   }
   else {
@@ -177,8 +177,8 @@ gulp.task('css', gulp.series('scss-lint-theme', 'scss-build-theme'));
 gulp.task('watch', (done) => {
   serverServe(done);
 
-  gulp.watch(`${config.devPath}/**/*.scss`, cssDevWatch);
-  gulp.watch(`${config.devPath}/**/*.js`, jsDevWatch);
+  gulp.watch(`${config.devPath}/**/*.scss`).on('change', cssDevWatch);
+  gulp.watch(`${config.devPath}/**/*.js`).on('change', jsDevWatch);
   gulp.watch(`${config.src.scssPath}/**/*.scss`, gulp.series('css', serverReload));
   gulp.watch('./**/*.php', gulp.series(serverReload));
 });
