@@ -3,9 +3,14 @@ const browserSync  = require('browser-sync').create();
 const gulp         = require('gulp');
 const autoprefixer = require('gulp-autoprefixer');
 const cleanCSS     = require('gulp-clean-css');
+const include      = require('gulp-include');
+const eslint       = require('gulp-eslint');
+const isFixed      = require('gulp-eslint-if-fixed');
+const babel        = require('gulp-babel');
 const rename       = require('gulp-rename');
 const sass         = require('gulp-sass');
 const sassLint     = require('gulp-sass-lint');
+const uglify       = require('gulp-uglify');
 const merge        = require('merge');
 
 
@@ -16,6 +21,7 @@ let config = {
   dist: {
     cssPath: './static/css'
   },
+  devPath: './dev',
   packagesPath: './node_modules',
   sync: false,
   syncTarget: 'http://localhost/wordpress/'
@@ -59,6 +65,71 @@ function buildCSS(src, dest) {
       extname: '.min.css'
     }))
     .pipe(gulp.dest(dest));
+}
+
+// Base JS linting function (with eslint). Fixes problems in-place.
+function lintJS(src, dest) {
+  dest = dest || config.src.jsPath;
+
+  return gulp.src(src)
+    .pipe(eslint({
+      fix: true
+    }))
+    .pipe(eslint.format())
+    .pipe(isFixed(dest));
+}
+
+// Base JS compile function
+function buildJS(src, dest) {
+  dest = dest || config.dist.jsPath;
+
+  return gulp.src(src)
+    .pipe(include({
+      includePaths: [config.packagesPath, config.src.jsPath]
+    }))
+    .on('error', console.log) // eslint-disable-line no-console
+    .pipe(babel())
+    .pipe(uglify())
+    .pipe(rename({
+      extname: '.min.js'
+    }))
+    .pipe(gulp.dest(dest));
+}
+
+// Watcher callback for dev scss files, to be used with gulp watch task
+function cssDevWatch(event) {
+  var src,
+    dest;
+
+  if (event) {
+    src = event.path;
+    dest = src.slice(0, (src.lastIndexOf('/') > -1 ? src.lastIndexOf('/') : src.lastIndexOf('\\')) + 1);
+  }
+  else {
+    src = `${config.devPath}/**/*.scss`;
+    dest = config.devPath;
+  }
+
+  lintSCSS(src);
+  return buildCSS(src, dest);
+}
+
+// Watcher callback for dev js files, to be used with gulp watch task
+function jsDevWatch(event) {
+  var src,
+    dest;
+
+  if (event) {
+    src = event.path;
+    dest = src.slice(0, (src.lastIndexOf('/') > -1 ? src.lastIndexOf('/') : src.lastIndexOf('\\')) + 1);
+  }
+  else {
+    src = `${config.devPath}/**/*.js`;
+    dest = config.devPath;
+  }
+
+  lintJS(src, dest);
+  return buildJS(src, dest);
 }
 
 // BrowserSync reload function
@@ -106,6 +177,8 @@ gulp.task('css', gulp.series('scss-lint-theme', 'scss-build-theme'));
 gulp.task('watch', (done) => {
   serverServe(done);
 
+  gulp.watch(`${config.devPath}/**/*.scss`, cssDevWatch);
+  gulp.watch(`${config.devPath}/**/*.js`, jsDevWatch);
   gulp.watch(`${config.src.scssPath}/**/*.scss`, gulp.series('css', serverReload));
   gulp.watch('./**/*.php', gulp.series(serverReload));
 });
