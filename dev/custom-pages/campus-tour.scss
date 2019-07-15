@@ -24,10 +24,12 @@ $map-width-lg: 320px;
 $map-height-lg: 480px;
 $map-width-xl: $map-width-lg * 1.25;
 $map-height-xl: $map-height-lg * 1.25;
+$map-marker-color: #ff5353;
 
 
 .page-campus-tour {
   .sidebar {
+    -ms-overflow-style: none; //sass-lint:disable-line no-vendor-prefixes
     -webkit-overflow-scrolling: touch; //sass-lint:disable-line no-vendor-prefixes
     background-color: $list-group-border-color;
     display: flex;
@@ -35,7 +37,9 @@ $map-height-xl: $map-height-lg * 1.25;
     flex-grow: 1;
     flex-shrink: 0;
     height: 100vh;
+    overflow-x: hidden;
     overflow-y: scroll;
+    scrollbar-width: none;
 
     @include media-breakpoint-up(lg) {
       flex-basis: $map-width-lg;
@@ -57,13 +61,13 @@ $map-height-xl: $map-height-lg * 1.25;
     @include media-breakpoint-up(lg) {
       flex-basis: $map-height-lg;
       height: $map-height-lg;
-      width: $map-width-lg;
+      max-width: $map-width-lg;
     }
 
     @include media-breakpoint-up(xl) {
       flex-basis: $map-height-xl;
       height: $map-height-xl;
-      width: $map-width-xl;
+      max-width: $map-width-xl;
     }
   }
 
@@ -76,9 +80,31 @@ $map-height-xl: $map-height-lg * 1.25;
     z-index: -1;
   }
 
+  // Disable indentation rule on this block so that
+  // text-shadow value is actually readable
+  // sass-lint:disable-block indentation
   .map-marker {
-    color: $brand-secondary;
+    color: $map-marker-color;
+    line-height: 0;
     position: absolute;
+    text-shadow:
+      transparentize($brand-secondary, .75) 1px 1px 0,
+      transparentize($brand-secondary, .75) 1px -1px 0,
+      transparentize($brand-secondary, .75) -1px 1px 0,
+      transparentize($brand-secondary, .75) -1px -1px 0,
+      transparentize($brand-secondary, .75) 1px 0 0,
+      transparentize($brand-secondary, .75) 0 1px 0,
+      transparentize($brand-secondary, .75) -1px 0 0,
+      transparentize($brand-secondary, .75) 0 -1px 0,
+      transparentize($brand-secondary, 0) 1px 1px 0;
+
+    @include media-breakpoint-up(lg) {
+      font-size: 2.5rem;
+    }
+
+    @include media-breakpoint-up(xl) {
+      font-size: 3.125rem;
+    }
 
     &::before {
       @include fa-icon();
@@ -86,11 +112,35 @@ $map-height-xl: $map-height-lg * 1.25;
     }
 
     @include hover-focus-active() {
-      color: $brand-complementary;
+      color: darken($map-marker-color, 15%);
     }
 
     &.active {
       color: $brand-primary;
     }
   }
+
+  .location-heading {
+    font-family: $font-family-condensed;
+    font-size: $font-size-h2 * $font-condensed-heading-size-ratio;
+    font-weight: normal;
+    text-transform: uppercase;
+
+    @include media-breakpoint-up(sm) {
+      font-size: $font-size-h1 * $font-condensed-heading-size-ratio;
+    }
+
+    @include media-breakpoint-up(lg) {
+      font-size: $font-size-h2-md * $font-condensed-heading-size-ratio;
+    }
+
+    @include media-breakpoint-up(xl) {
+      font-size: $font-size-h1-md * $font-condensed-heading-size-ratio;
+    }
+  }
+}
+
+.tooltip {
+  font-size: $tooltip-font-size;
+  line-height: 1.2;
 }
