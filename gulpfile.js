@@ -48,7 +48,7 @@ function lintSCSS(src) {
 }
 
 // Base SCSS compile function
-function buildCSS(src, dest) {
+function buildCSS(src, dest, extname = '.min.css') {
   dest = dest || config.dist.cssPath;
 
   return gulp.src(src)
@@ -62,7 +62,7 @@ function buildCSS(src, dest) {
       cascade: false
     }))
     .pipe(rename({
-      extname: '.min.css'
+      extname: extname
     }))
     .pipe(gulp.dest(dest));
 }
@@ -80,7 +80,7 @@ function lintJS(src, dest) {
 }
 
 // Base JS compile function
-function buildJS(src, dest) {
+function buildJS(src, dest, extname = '.min.js') {
   dest = dest || config.dist.jsPath;
 
   return gulp.src(src)
@@ -91,7 +91,7 @@ function buildJS(src, dest) {
     .pipe(babel())
     .pipe(uglify())
     .pipe(rename({
-      extname: '.min.js'
+      extname: extname
     }))
     .pipe(gulp.dest(dest));
 }
@@ -168,17 +168,21 @@ gulp.task('watch', (done) => {
     const dest    = srcDest.dest;
 
     lintSCSS(src);
-    return buildJS(src, dest);
+    // Use -min.css instead of .min.css for Dev files as a workaround
+    // for WP mimetype filtering issues
+    return buildCSS(src, dest, '-min.css');
   });
 
   // Dev js files
-  gulp.watch([`${config.devPath}/**/*.js`, `!${config.devPath}/**/*.min.js`]).on('change', (eventPath) => {
+  gulp.watch([`${config.devPath}/**/*.js`, `!${config.devPath}/**/*-min.js`]).on('change', (eventPath) => {
     const srcDest = getDevWatchSrcDest(eventPath, 'js');
     const src     = srcDest.src;
     const dest    = srcDest.dest;
 
     lintJS(src, dest);
-    return buildJS(src, dest);
+    // Use -min.js instead of .min.js for Dev files as a workaround
+    // for WP mimetype filtering issues
+    return buildJS(src, dest, '-min.js');
   });
 
   // Theme scss files
