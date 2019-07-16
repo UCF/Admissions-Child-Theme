@@ -20,30 +20,73 @@
 //
 // Custom page variables
 //
+$map-width: 280px;
+$map-height: 420px;
 $map-width-lg: 320px;
 $map-height-lg: 480px;
-$map-width-xl: $map-width-lg * 1.25;
-$map-height-xl: $map-height-lg * 1.25;
+$map-width-xl: 400px;
+$map-height-xl: 600px;
 $map-marker-color: #ff5353;
+$page-overlay-zindex: $zindex-ucf-header + 1;
+$sidebar-zindex: $page-overlay-zindex + 1;
+$sidebar-close-zindex: $sidebar-zindex + 1;
+
+
+@mixin mobile-sidebar-active() {
+  @at-root #{selector-replace(&, '.page-campus-tour', '.page-campus-tour.mobile-sidebar-active')} {
+    @content;
+  }
+}
 
 
 .page-campus-tour {
+  .page-mobile-overlay {
+    background-color: transparentize($brand-secondary, .75);
+    bottom: 0;
+    display: none;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: $page-overlay-zindex;
+
+    @include mobile-sidebar-active() {
+      display: block;
+
+      @include media-breakpoint-up(lg) {
+        display: none;
+      }
+    }
+  }
+
   .sidebar {
-    -ms-overflow-style: none; //sass-lint:disable-line no-vendor-prefixes
     -webkit-overflow-scrolling: touch; //sass-lint:disable-line no-vendor-prefixes
-    background-color: $list-group-border-color;
-    display: flex;
+    background-color: #dfdfdf;
+    display: none;
+    flex-basis: $map-width;
     flex-direction: column;
     flex-grow: 1;
     flex-shrink: 0;
     height: 100vh;
+    max-width: $map-width;
     overflow-x: hidden;
     overflow-y: scroll;
-    scrollbar-width: none;
+    z-index: $sidebar-zindex;
+
+    @include mobile-sidebar-active() {
+      display: flex;
+    }
+
+    @include media-breakpoint-down(md) {
+      position: fixed;
+    }
 
     @include media-breakpoint-up(lg) {
+      -ms-overflow-style: none; //sass-lint:disable-line no-vendor-prefixes
+      display: flex;
       flex-basis: $map-width-lg;
       max-width: $map-width-lg;
+      scrollbar-width: none;
     }
 
     @include media-breakpoint-up(xl) {
@@ -52,9 +95,37 @@ $map-marker-color: #ff5353;
     }
   }
 
+  .sidebar-close {
+    background-color: $brand-primary;
+    border-radius: 100%;
+    display: none;
+    float: none;
+    left: calc(#{$map-width} - .5rem);
+    opacity: 1;
+    padding: .75rem;
+    position: fixed;
+    top: .5rem;
+    z-index: $sidebar-close-zindex;
+
+    @include mobile-sidebar-active() {
+      display: block;
+
+      @include media-breakpoint-up(lg) {
+        display: none;
+      }
+    }
+
+    @include media-breakpoint-up(lg) {
+      display: none;
+    }
+  }
+
   .map {
+    flex-basis: $map-height;
     flex-grow: 0;
     flex-shrink: 0;
+    height: $map-height;
+    max-width: $map-width;
     overflow: hidden;
     position: relative;
 
@@ -85,6 +156,7 @@ $map-marker-color: #ff5353;
   // sass-lint:disable-block indentation
   .map-marker {
     color: $map-marker-color;
+    font-size: 2.1875rem;
     line-height: 0;
     position: absolute;
     text-shadow:

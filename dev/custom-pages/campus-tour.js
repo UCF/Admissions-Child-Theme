@@ -4,8 +4,14 @@
   const anchorSelector = '.js-anchor';
   const mapMarkerSelector = '.map-marker';
   const mapMarkerTextSelector = '.js-marker-tooltip-text';
-  const scrollTime = 750; // ms
-  const mapVisibilityMinimumWidth = 992; // px
+  const pageWrapActiveSidebarClass = 'mobile-sidebar-active';
+  const $pageWrap = $('#js-page-campus-tour');
+  const $sidebar = $('#js-sidebar');
+  const $sidebarMenu = $('#js-sidebar-menu');
+  const $sidebarToggleBtn = $('#js-sidebar-toggle-btn');
+  const $sidebarCloseBtn = $('#js-sidebar-close-btn');
+  const scrollTime = 750; // ms; amount of time for scroll animations to take place
+  const mapVisibilityMinimumWidth = 992; // px; minimum width at which the sidebar is always visible
 
 
   // Returns any active anchor links.
@@ -43,8 +49,13 @@
     // Autoscroll to section on page and update document url
     // if this is a valid page anchor.
     if ($anchor.length) {
+      let offset = $anchor.offset().top + 1;
+      if (mobileSidebarIsActive() && hash !== '#content') {
+        offset -= $sidebarMenu.outerHeight();
+      }
+
       $('html, body').animate({
-        scrollTop: $anchor.offset().top + 1
+        scrollTop: offset
       }, scrollTime);
 
       if (history.pushState) {
@@ -75,6 +86,21 @@
     }
   }
 
+  //
+  function mobileSidebarIsActive() {
+    return $pageWrap.hasClass(pageWrapActiveSidebarClass) && $(window).width() < mapVisibilityMinimumWidth;
+  }
+
+  //
+  function closeSidebar() {
+    $pageWrap.removeClass(pageWrapActiveSidebarClass);
+  }
+
+  //
+  function toggleSidebar() {
+    $pageWrap.toggleClass(pageWrapActiveSidebarClass);
+  }
+
 
   // Returns whether or not a given element is visible in the viewport
   $.fn.isInViewport = function () {
@@ -102,6 +128,9 @@
           clearActiveAnchorLinks();
           assignActiveAnchorLinks(hash);
           scrollToAnchor(hash);
+          if (mobileSidebarIsActive()) {
+            closeSidebar();
+          }
         }
       });
 
@@ -119,6 +148,17 @@
         return $(this).find(mapMarkerTextSelector).text();
       }
     });
+    $sidebarCloseBtn.on('click', closeSidebar);
+    $sidebarToggleBtn.on('click', toggleSidebar);
+  });
+
+  $(document).on('click', (e) => {
+    const $target = $(e.target);
+
+    // Hide the sidebar when anything else is clicked
+    if (mobileSidebarIsActive() && !$target.closest($sidebar).length && !$target.closest($sidebarToggleBtn).length) {
+      closeSidebar();
+    }
   });
 
   $(window).on('scroll resize', anchorScrollWatch);
