@@ -41,7 +41,7 @@ $sidebar-close-zindex: $sidebar-zindex + 1;
 
 .page-campus-tour {
   .page-mobile-overlay {
-    background-color: transparentize($brand-secondary, .75);
+    background-color: transparentize($brand-secondary, .5);
     bottom: 0;
     display: none;
     left: 0;
@@ -62,31 +62,40 @@ $sidebar-close-zindex: $sidebar-zindex + 1;
   .sidebar {
     -webkit-overflow-scrolling: touch; //sass-lint:disable-line no-vendor-prefixes
     background-color: #dfdfdf;
-    display: none;
+    display: flex;
     flex-basis: $map-width;
     flex-direction: column;
     flex-grow: 1;
     flex-shrink: 0;
     height: 100vh;
     max-width: $map-width;
+    opacity: 0;
     overflow-x: hidden;
     overflow-y: scroll;
+    // transition: opacity .3s cubic-bezier(.25, .5, .5, .9);
+    transition: left .3s cubic-bezier(.25, .5, .5, .9), opacity .3s cubic-bezier(.25, .5, .5, .9);
     z-index: $sidebar-zindex;
 
     @include mobile-sidebar-active() {
-      display: flex;
+      left: 0;
+      opacity: 1;
+      transition: left .3s cubic-bezier(.25, .5, .5, .9), opacity .3s cubic-bezier(.25, .5, .5, .9);
     }
 
     @include media-breakpoint-down(md) {
+      left: -#{$map-width};
       position: fixed;
+      top: 0;
     }
 
     @include media-breakpoint-up(lg) {
       -ms-overflow-style: none; //sass-lint:disable-line no-vendor-prefixes
-      display: flex;
       flex-basis: $map-width-lg;
+      left: auto;
       max-width: $map-width-lg;
+      opacity: 1;
       scrollbar-width: none;
+      transition: none;
     }
 
     @include media-breakpoint-up(xl) {
@@ -98,17 +107,20 @@ $sidebar-close-zindex: $sidebar-zindex + 1;
   .sidebar-close {
     background-color: $brand-primary;
     border-radius: 100%;
-    display: none;
+    display: block;
     float: none;
-    left: calc(#{$map-width} - .5rem);
-    opacity: 1;
+    left: -3rem;
+    opacity: 0;
     padding: .75rem;
     position: fixed;
-    top: .5rem;
+    top: 1.25rem;
+    transition: left .3s cubic-bezier(.25, .5, .5, .9), opacity .3s cubic-bezier(.25, .5, .5, .9);
     z-index: $sidebar-close-zindex;
 
     @include mobile-sidebar-active() {
-      display: block;
+      left: calc(#{$map-width} - .5rem);
+      opacity: 1;
+      transition: left .3s cubic-bezier(.25, .5, .5, .9), opacity .3s cubic-bezier(.25, .5, .5, .9);
 
       @include media-breakpoint-up(lg) {
         display: none;

@@ -86,19 +86,21 @@
     }
   }
 
-  //
+  // Returns whether or not the sidebar is visible on mobile.
   function mobileSidebarIsActive() {
     return $pageWrap.hasClass(pageWrapActiveSidebarClass) && $(window).width() < mapVisibilityMinimumWidth;
   }
 
-  //
+  // Closes a visible sidebar menu.
   function closeSidebar() {
     $pageWrap.removeClass(pageWrapActiveSidebarClass);
+    $sidebarToggleBtn.addClass('collapsed');
   }
 
-  //
+  // Toggles the sidebar menu open/closed.
   function toggleSidebar() {
     $pageWrap.toggleClass(pageWrapActiveSidebarClass);
+    $sidebarToggleBtn.toggleClass('collapsed');
   }
 
 
