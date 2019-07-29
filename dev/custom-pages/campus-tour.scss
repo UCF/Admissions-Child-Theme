@@ -1,0 +1,230 @@
+//
+// Theme variables and variable overrides
+//
+@import 'variables';
+
+
+//
+// Third-party assets
+//
+
+// Athena Framework
+@import './ucf-athena-framework/src/scss/variables';
+@import './ucf-athena-framework/src/scss/mixins';
+
+// Font Awesome
+@import './font-awesome/scss/variables';
+@import './font-awesome/scss/mixins';
+
+
+//
+// Custom page variables
+//
+$map-width: 280px;
+$map-height: 420px;
+$map-width-lg: 320px;
+$map-height-lg: 480px;
+$map-width-xl: 400px;
+$map-height-xl: 600px;
+$map-marker-color: #ff5353;
+$page-overlay-zindex: $zindex-ucf-header + 1;
+$sidebar-zindex: $page-overlay-zindex + 1;
+$sidebar-close-zindex: $sidebar-zindex + 1;
+
+
+@mixin mobile-sidebar-active() {
+  @at-root #{selector-replace(&, '.page-campus-tour', '.page-campus-tour.mobile-sidebar-active')} {
+    @content;
+  }
+}
+
+
+.page-campus-tour {
+  .page-mobile-overlay {
+    background-color: transparentize($brand-secondary, .5);
+    bottom: 0;
+    display: none;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: $page-overlay-zindex;
+
+    @include mobile-sidebar-active() {
+      display: block;
+
+      @include media-breakpoint-up(lg) {
+        display: none;
+      }
+    }
+  }
+
+  .sidebar {
+    -webkit-overflow-scrolling: touch; //sass-lint:disable-line no-vendor-prefixes
+    background-color: #dfdfdf;
+    display: flex;
+    flex-basis: $map-width;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-shrink: 0;
+    height: 100vh;
+    max-width: $map-width;
+    opacity: 0;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    // transition: opacity .3s cubic-bezier(.25, .5, .5, .9);
+    transition: left .3s cubic-bezier(.25, .5, .5, .9), opacity .3s cubic-bezier(.25, .5, .5, .9);
+    z-index: $sidebar-zindex;
+
+    @include mobile-sidebar-active() {
+      left: 0;
+      opacity: 1;
+      transition: left .3s cubic-bezier(.25, .5, .5, .9), opacity .3s cubic-bezier(.25, .5, .5, .9);
+    }
+
+    @include media-breakpoint-down(md) {
+      left: -#{$map-width};
+      position: fixed;
+      top: 0;
+    }
+
+    @include media-breakpoint-up(lg) {
+      -ms-overflow-style: none; //sass-lint:disable-line no-vendor-prefixes
+      flex-basis: $map-width-lg;
+      left: auto;
+      max-width: $map-width-lg;
+      opacity: 1;
+      scrollbar-width: none;
+      transition: none;
+    }
+
+    @include media-breakpoint-up(xl) {
+      flex-basis: $map-width-xl;
+      max-width: $map-width-xl;
+    }
+  }
+
+  .sidebar-close {
+    background-color: $brand-primary;
+    border-radius: 100%;
+    display: block;
+    float: none;
+    left: -3rem;
+    opacity: 0;
+    padding: .75rem;
+    position: fixed;
+    top: 1.25rem;
+    transition: left .3s cubic-bezier(.25, .5, .5, .9), opacity .3s cubic-bezier(.25, .5, .5, .9);
+    z-index: $sidebar-close-zindex;
+
+    @include mobile-sidebar-active() {
+      left: calc(#{$map-width} - .5rem);
+      opacity: 1;
+      transition: left .3s cubic-bezier(.25, .5, .5, .9), opacity .3s cubic-bezier(.25, .5, .5, .9);
+
+      @include media-breakpoint-up(lg) {
+        display: none;
+      }
+    }
+
+    @include media-breakpoint-up(lg) {
+      display: none;
+    }
+  }
+
+  .map {
+    flex-basis: $map-height;
+    flex-grow: 0;
+    flex-shrink: 0;
+    height: $map-height;
+    max-width: $map-width;
+    overflow: hidden;
+    position: relative;
+
+    @include media-breakpoint-up(lg) {
+      flex-basis: $map-height-lg;
+      height: $map-height-lg;
+      max-width: $map-width-lg;
+    }
+
+    @include media-breakpoint-up(xl) {
+      flex-basis: $map-height-xl;
+      height: $map-height-xl;
+      max-width: $map-width-xl;
+    }
+  }
+
+  .map-img {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: -1;
+  }
+
+  // Disable indentation rule on this block so that
+  // text-shadow value is actually readable
+  // sass-lint:disable-block indentation
+  .map-marker {
+    color: $map-marker-color;
+    font-size: 2.1875rem;
+    line-height: 0;
+    position: absolute;
+    text-shadow:
+      transparentize($brand-secondary, .75) 1px 1px 0,
+      transparentize($brand-secondary, .75) 1px -1px 0,
+      transparentize($brand-secondary, .75) -1px 1px 0,
+      transparentize($brand-secondary, .75) -1px -1px 0,
+      transparentize($brand-secondary, .75) 1px 0 0,
+      transparentize($brand-secondary, .75) 0 1px 0,
+      transparentize($brand-secondary, .75) -1px 0 0,
+      transparentize($brand-secondary, .75) 0 -1px 0,
+      transparentize($brand-secondary, 0) 1px 1px 0;
+
+    @include media-breakpoint-up(lg) {
+      font-size: 2.5rem;
+    }
+
+    @include media-breakpoint-up(xl) {
+      font-size: 3.125rem;
+    }
+
+    &::before {
+      @include fa-icon();
+      content: $fa-var-map-marker;
+    }
+
+    @include hover-focus-active() {
+      color: darken($map-marker-color, 15%);
+    }
+
+    &.active {
+      color: $brand-primary;
+    }
+  }
+
+  .location-heading {
+    font-family: $font-family-condensed;
+    font-size: $font-size-h2 * $font-condensed-heading-size-ratio;
+    font-weight: normal;
+    text-transform: uppercase;
+
+    @include media-breakpoint-up(sm) {
+      font-size: $font-size-h1 * $font-condensed-heading-size-ratio;
+    }
+
+    @include media-breakpoint-up(lg) {
+      font-size: $font-size-h2-md * $font-condensed-heading-size-ratio;
+    }
+
+    @include media-breakpoint-up(xl) {
+      font-size: $font-size-h1-md * $font-condensed-heading-size-ratio;
+    }
+  }
+}
+
+.tooltip {
+  font-size: $tooltip-font-size;
+  line-height: 1.2;
+}
