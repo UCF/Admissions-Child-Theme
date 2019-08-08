@@ -13,6 +13,10 @@ if ( ! function_exists( 'ucf_degree_external_list_card_order' ) ) {
 	 * @param array $args Any additional arguments passed in from the shortcode
 	 */
 	function ucf_degree_external_list_card_order( $items, $args ) {
+		if ( ! $items ) {
+			return $items;
+		}
+
 		$retval = clone $items;
 		$retval->types = array();
 		$colleges = array();
