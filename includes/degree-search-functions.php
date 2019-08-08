@@ -71,8 +71,10 @@ if ( ! function_exists( 'ucf_degree_external_list_twocol_layout' ) ) {
 		$item_count = 0;
 
 		// Get accuracte count of items
-		foreach( $items->types as $group ) {
-			$item_count += count( $group->degrees );
+		if ( $items ) {
+			foreach( $items->types as $group ) {
+				$item_count += count( $group->degrees );
+			}
 		}
 
 		// Figure out where we're going to split the columns
