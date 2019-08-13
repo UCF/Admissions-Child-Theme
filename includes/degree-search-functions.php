@@ -10,10 +10,13 @@ if ( ! function_exists( 'ucf_degree_external_list_card_order' ) ) {
 	 * @since 1.0.0
 	 * @author Jim Barnes
 	 * @param object $items The decoded JSON of degree data
-	 * @param string $layout The layout currently being used
 	 * @param array $args Any additional arguments passed in from the shortcode
 	 */
-	function ucf_degree_external_list_card_order( $items, $layout, $args ) {
+	function ucf_degree_external_list_card_order( $items, $args ) {
+		if ( ! $items ) {
+			return $items;
+		}
+
 		$retval = clone $items;
 		$retval->types = array();
 		$colleges = array();
@@ -68,8 +71,10 @@ if ( ! function_exists( 'ucf_degree_external_list_twocol_layout' ) ) {
 		$item_count = 0;
 
 		// Get accuracte count of items
-		foreach( $items->types as $group ) {
-			$item_count += count( $group->degrees );
+		if ( $items ) {
+			foreach( $items->types as $group ) {
+				$item_count += count( $group->degrees );
+			}
 		}
 
 		// Figure out where we're going to split the columns
