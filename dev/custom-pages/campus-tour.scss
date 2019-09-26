@@ -102,6 +102,13 @@ $sidebar-close-zindex: $sidebar-zindex + 1;
       flex-basis: $map-width-xl;
       max-width: $map-width-xl;
     }
+
+    &::-webkit-scrollbar { //sass-lint:disable-line no-vendor-prefixes
+      @include media-breakpoint-up(lg) {
+        height: 0;
+        width: 0;
+      }
+    }
   }
 
   .sidebar-close {
