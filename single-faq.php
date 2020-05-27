@@ -29,25 +29,17 @@ $related_posts = UCF_FAQ_Common::get_related_faqs_by_tag( $tags, array( $post->I
 <div class="container">
 	<div class="row">
 		<article class="col-xl-8 col-lg-7 mb-4">
-			<div class="ucf-faq-list">
-				<div class="ucf-faq-list-inner">
-					<div class="ucf-faq-topic-answer">
-						<?php
-						echo apply_filters( 'the_content', $post->post_content );
-						?>
-					</div>
-					<?php if ( $related_posts ) : ?>
-						<div class="ucf-faq-related-questions<?php UCF_FAQ_Config::add_athena_attr( $related_classes ); ?>">
-							<?php echo UCF_FAQ_Common::display_related_faqs( $related_posts, $related_faq_title, $atts ); ?>
-						</div>
-					<?php endif; ?>
-					<?php if ( $cta_text && $cta_url ) : ?>
-						<div class="ucf-faq-footer<?php UCF_FAQ_Config::add_athena_attr( $answer_classes ); ?>">
-							<?php echo UCF_FAQ_Common::display_footer_cta( $cta_text, $cta_url ); ?>
-						</div>
-					<?php endif; ?>
+			<?php echo apply_filters( 'the_content', $post->post_content ); ?>
+			<?php if ( $related_posts ) : ?>
+				<div class="ucf-faq-related-questions<?php UCF_FAQ_Config::add_athena_attr( $related_classes ); ?>">
+					<?php echo UCF_FAQ_Common::display_related_faqs( $related_posts, $related_faq_title, $atts ); ?>
 				</div>
-			</div>
+			<?php endif; ?>
+			<?php if ( $cta_text && $cta_url ) : ?>
+				<div class="ucf-faq-footer<?php UCF_FAQ_Config::add_athena_attr( $answer_classes ); ?>">
+					<?php echo UCF_FAQ_Common::display_footer_cta( $cta_text, $cta_url ); ?>
+				</div>
+			<?php endif; ?>
 		</article>
 		<?php if ( $topic_spotlight ) : ?>
 		<div class="col-xl-4 col-lg-5 mt-4 mt-lg-0 mb-4">
