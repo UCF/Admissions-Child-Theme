@@ -36,7 +36,7 @@ $related_posts = UCF_FAQ_Common::get_related_faqs_by_tag( $tags, array( $post->I
 				</div>
 			<?php endif; ?>
 			<?php if ( $cta_text && $cta_url ) : ?>
-				<div class="ucf-faq-footer<?php UCF_FAQ_Config::add_athena_attr( $answer_classes ); ?>">
+				<div class="ucf-faq-footer">
 					<?php echo UCF_FAQ_Common::display_footer_cta( $cta_text, $cta_url ); ?>
 				</div>
 			<?php endif; ?>
