@@ -50,7 +50,7 @@ $related_posts = UCF_FAQ_Common::get_related_faqs_by_tag( $tags, array( $post->I
 			</div>
 		</article>
 		<?php if ( $topic_spotlight ) : ?>
-		<div class="col-xl-4 col-lg-5 mt-4 mt-lg-0">
+		<div class="col-xl-4 col-lg-5 mt-4 mt-lg-0 mb-2 mb-lg-4">
 			<?php echo do_shortcode( '[ucf-spotlight slug="' . $topic_spotlight->post_name . '"]' ); ?>
 		</div>
 		<?php endif; ?>
