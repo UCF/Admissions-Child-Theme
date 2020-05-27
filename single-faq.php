@@ -28,7 +28,7 @@ $related_posts = UCF_FAQ_Common::get_related_faqs_by_tag( $tags, array( $post->I
 
 <div class="container">
 	<div class="row">
-		<article class="col-xl-8 col-lg-7">
+		<article class="col-xl-8 col-lg-7 mb-2 mb-lg-4">
 			<div class="ucf-faq-list">
 				<div class="ucf-faq-list-inner">
 					<div class="ucf-faq-topic-answer">
