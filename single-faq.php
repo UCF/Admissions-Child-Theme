@@ -19,9 +19,6 @@ if ( $topic && is_array( $topic ) ) {
 
 $related_faq_title = ( get_field( 'related-faq-title', $topic ) ) ? get_field( 'related-faq-title', $topic ) : 'Related FAQs';
 
-$cta_text = get_field( 'faq-topic-footer-cta-text', $topic );
-$cta_url = site_url() . get_field( 'faq-topic-footer-cta-url', $topic );
-
 if ( $topic ) {
 	$cta_text = "View All $topic->name FAQs";
 	$cta_url  = get_term_link( $topic, 'topic' );
