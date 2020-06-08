@@ -19,8 +19,10 @@ if ( $topic && is_array( $topic ) ) {
 
 $related_faq_title = ( get_field( 'related-faq-title', $topic ) ) ? get_field( 'related-faq-title', $topic ) : 'Related FAQs';
 
-$cta_text = get_field( 'faq-topic-footer-cta-text', $topic );
-$cta_url = site_url() . get_field( 'faq-topic-footer-cta-url', $topic );
+if ( $topic ) {
+	$cta_text = "View All $topic->name FAQs";
+	$cta_url  = get_term_link( $topic, 'topic' );
+}
 
 $tags = wp_get_post_tags( $post->ID, array( 'fields' => 'slugs' ) );
 $related_posts = UCF_FAQ_Common::get_related_faqs_by_tag( $tags, array( $post->ID ) );
@@ -37,7 +39,7 @@ $related_posts = UCF_FAQ_Common::get_related_faqs_by_tag( $tags, array( $post->I
 			<?php endif; ?>
 			<?php if ( $cta_text && $cta_url ) : ?>
 				<div class="ucf-faq-footer">
-					<?php echo UCF_FAQ_Common::display_footer_cta( $cta_text, $cta_url ); ?>
+					<a href="<?php echo $cta_url; ?>" class="btn btn-outline-secondary mt-4"><?php echo $cta_text; ?></a>
 				</div>
 			<?php endif; ?>
 		</article>
