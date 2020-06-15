@@ -9,6 +9,9 @@ $answer_classes = " col-lg-8";
 $related_classes = " col-lg-8 mb-4";
 $tags = array();
 $topic = wp_get_post_terms( $post->ID, 'topic' );
+$topic_spotlight = null;
+$cta_text = null;
+$cta_url = null;
 
 $topic_cta = null;
 
