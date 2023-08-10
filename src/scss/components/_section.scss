@@ -1,0 +1,243 @@
+//
+// Icon lists
+//
+
+@use 'sass:math';
+
+.icon-list {
+  list-style-type: none;
+  margin-left: -(math.div($icon-list-bullet-size, $icon-list-bullet-width-multiplier));
+  padding-left: 0;
+
+  @include media-breakpoint-up(md) {
+    margin-left: -(math.div($icon-list-bullet-size-md, $icon-list-bullet-width-multiplier));
+  }
+
+  &.icon-list-lg {
+    margin-left: -(math.div($icon-list-lg-bullet-size, $icon-list-lg-bullet-width-multiplier));
+
+    @include media-breakpoint-up(md) {
+      margin-left: -(math.div($icon-list-lg-bullet-size-md, $icon-list-lg-bullet-width-multiplier));
+    }
+  }
+}
+
+.icon-list-numbered {
+  counter-reset: numberedlist;
+}
+
+.icon-list-item {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  .icon-list-lg & {
+    margin-bottom: .5rem;
+  }
+}
+
+.icon-list-bullet-fonticon {
+  font-size: $icon-list-bullet-size;
+  text-align: center;
+  width: $icon-list-bullet-size * $icon-list-bullet-width-multiplier;
+
+  @include media-breakpoint-up(md) {
+    font-size: $icon-list-bullet-size-md;
+    width: $icon-list-bullet-size-md * $icon-list-bullet-width-multiplier;
+  }
+
+  .icon-list-lg & {
+    font-size: $icon-list-lg-bullet-size;
+    width: $icon-list-lg-bullet-size * $icon-list-lg-bullet-width-multiplier;
+
+    @include media-breakpoint-up(md) {
+      font-size: $icon-list-lg-bullet-size-md;
+      width: $icon-list-lg-bullet-size-md * $icon-list-lg-bullet-width-multiplier;
+    }
+  }
+}
+
+.icon-list-bullet-number {
+  border-radius: 50%;
+  font-family: $font-family-slab-serif;
+  font-weight: bold;
+  height: $icon-list-bullet-size;
+  line-height: $icon-list-bullet-size;
+  margin-left: ( ($icon-list-bullet-size * $icon-list-bullet-width-multiplier) - $icon-list-bullet-size ) * .5;
+  margin-right: ( ($icon-list-bullet-size * $icon-list-bullet-width-multiplier) - $icon-list-bullet-size ) * .5;
+  text-align: center;
+  width: $icon-list-bullet-size;
+
+  &::before {
+    content: counter(numberedlist);
+    counter-increment: numberedlist;
+  }
+
+  @include media-breakpoint-up(md) {
+    height: $icon-list-bullet-size-md;
+    line-height: $icon-list-bullet-size-md;
+    margin-left: ( ($icon-list-bullet-size-md * $icon-list-bullet-width-multiplier) - $icon-list-bullet-size-md ) * .5;
+    margin-right: ( ($icon-list-bullet-size-md * $icon-list-bullet-width-multiplier) - $icon-list-bullet-size-md ) * .5;
+    width: $icon-list-bullet-size-md;
+  }
+
+  .icon-list-lg & {
+    font-size: $font-size-xs * $icon-list-lg-bullet-width-multiplier; // reduce font size a bit
+    height: $icon-list-lg-bullet-size;
+    line-height: $icon-list-lg-bullet-size;
+    margin-left: ( ($icon-list-lg-bullet-size * $icon-list-lg-bullet-width-multiplier) - $icon-list-lg-bullet-size ) * .5;
+    margin-right: ( ($icon-list-lg-bullet-size * $icon-list-lg-bullet-width-multiplier) - $icon-list-lg-bullet-size ) * .5;
+    width: $icon-list-lg-bullet-size;
+
+    @include media-breakpoint-up(md) {
+      font-size: $font-size-sm * $icon-list-lg-bullet-width-multiplier;
+      height: $icon-list-lg-bullet-size-md;
+      line-height: $icon-list-lg-bullet-size-md;
+      margin-left: ( ($icon-list-lg-bullet-size-md * $icon-list-lg-bullet-width-multiplier) - $icon-list-lg-bullet-size-md ) * .5;
+      margin-right: ( ($icon-list-lg-bullet-size-md * $icon-list-lg-bullet-width-multiplier) - $icon-list-lg-bullet-size-md) * .5;
+      width: $icon-list-lg-bullet-size-md;
+    }
+  }
+}
+
+.icon-list-item-heading,
+.icon-list-item-content {
+  // Set the width of the list item heading and content to leave
+  // space for the icon:
+  flex: 0 0 calc(100% - #{$icon-list-bullet-size * $icon-list-bullet-width-multiplier});
+  max-width: calc(100% - #{$icon-list-bullet-size * $icon-list-bullet-width-multiplier});
+
+  @include media-breakpoint-up(md) {
+    flex: 0 0 calc(100% - #{$icon-list-bullet-size-md * $icon-list-bullet-width-multiplier});
+    max-width: calc(100% - #{$icon-list-bullet-size-md * $icon-list-bullet-width-multiplier});
+  }
+
+  .icon-list-lg & {
+    flex: 0 0 calc(100% - #{$icon-list-lg-bullet-size * $icon-list-lg-bullet-width-multiplier});
+    max-width: calc(100% - #{$icon-list-lg-bullet-size * $icon-list-lg-bullet-width-multiplier});
+
+    @include media-breakpoint-up(md) {
+      flex: 0 0 calc(100% - #{$icon-list-lg-bullet-size-md * $icon-list-lg-bullet-width-multiplier});
+      max-width: calc(100% - #{$icon-list-lg-bullet-size-md * $icon-list-lg-bullet-width-multiplier});
+    }
+  }
+
+  // Align either the list item heading or list item content so that
+  // the first line of content is vertically centered with the icon:
+  .icon-list-bullet + & {
+    padding-top: calc((#{$icon-list-bullet-size} - (1em * #{$line-height-base})) / 2);
+
+    @include media-breakpoint-up(md) {
+      padding-top: calc((#{$icon-list-bullet-size-md} - (1em * #{$line-height-base})) / 2);
+    }
+
+    .icon-list-lg & {
+      padding-top: calc((#{$icon-list-lg-bullet-size} - (1em * #{$headings-line-height})) / 2);
+
+      @include media-breakpoint-up(md) {
+        padding-top: calc((#{$icon-list-lg-bullet-size-md} - (1em * #{$headings-line-height})) / 2);
+      }
+    }
+  }
+}
+
+.icon-list-item-heading {
+  font-family: $font-family-slab-serif;
+  font-size: 1.38rem;
+  line-height: $headings-line-height; // ensure heading line height is enforced on <strong>'s
+  margin-bottom: 1rem;
+
+  @include media-breakpoint-up(md) {
+    font-size: 1.725rem;
+  }
+}
+
+.icon-list-item-content {
+  // Add left-hand padding to list item content in lists that use headings
+  // to emulate indentation, and override width rules to accommodate:
+  .icon-list-item-heading + & {
+    flex: 0 0 100%;
+    max-width: 100%;
+    padding-left: math.div($icon-list-bullet-size, $icon-list-bullet-width-multiplier);
+
+    @include media-breakpoint-up(md) {
+      padding-left: $icon-list-bullet-size-md * $icon-list-bullet-width-multiplier;
+    }
+
+    .icon-list-lg & {
+      padding-left: math.div($icon-list-lg-bullet-size, $icon-list-lg-bullet-width-multiplier);
+
+      @include media-breakpoint-up(md) {
+        padding-left: $icon-list-lg-bullet-size-md * $icon-list-lg-bullet-width-multiplier;
+      }
+    }
+  }
+}
+
+
+//
+// Timelines
+//
+
+.timeline {
+  position: relative;
+
+  &::before {
+    background-color: $timeline-border-color;
+    bottom: 0;
+    content: '';
+    display: block;
+    position: absolute;
+    top: calc(#{$timeline-heading-height} / 2);
+    width: $timeline-border-width;
+  }
+}
+
+.timeline-heading {
+  font-size: $timeline-heading-font-size;
+  font-weight: bold;
+  letter-spacing: $letter-spacing-base;
+  margin-bottom: $timeline-heading-margin;
+  margin-left: $timeline-item-gap;
+  margin-top: 1.5rem;
+  position: relative;
+  text-transform: uppercase;
+
+  &:first-child {
+    margin-top: $timeline-heading-margin;
+  }
+
+  &::before,
+  &::after {
+    background-color: $timeline-border-color;
+    content: '';
+    display: block;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+  }
+
+  &::before {
+    height: $timeline-border-width;
+    left: -$timeline-item-gap;
+    top: calc(50% - (#{$timeline-border-width} / 2));
+    width: $timeline-item-gap - $timeline-item-bullet-size - $timeline-item-bullet-gap;
+  }
+
+  &::after {
+    border-radius: 100%;
+    height: $timeline-item-bullet-size;
+    left: -$timeline-item-bullet-size - $timeline-item-bullet-gap;
+    top: calc(50% - (#{$timeline-item-bullet-size} / 2));
+    width: $timeline-item-bullet-size;
+  }
+}
+
+.timeline-content {
+  display: list-item;
+  margin-left: 1.5em + $timeline-item-gap;
+
+  br:nth-child(2n+1) {
+    display: none;
+  }
+}
