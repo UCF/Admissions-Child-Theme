@@ -59,7 +59,7 @@ $generate = UCF_FAQ_Config::get_option_or_default( 'add_json_data' );
 if ( $generate ) : ?>
 <script type="application/ld+json">
 <?php
-	if ( method_exists( UCF_FAQ_Common, 'generate_json_ld' ) ) {
+	if ( method_exists( 'UCF_FAQ_Common', 'generate_json_ld' ) ) {
 		echo UCF_FAQ_Common::generate_json_ld( array( $post ) );
 	}
 ?>
